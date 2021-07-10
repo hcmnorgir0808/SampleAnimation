@@ -12,14 +12,6 @@ final class HalfModalViewController: UIViewController {
 
     @IBOutlet private weak var slideViewCenterYConstraint: NSLayoutConstraint!
     
-    //オマケ 一応見栄え良く角丸にしてるだけ
-    @IBOutlet private weak var topBarView: UIView! {
-        didSet {
-            topBarView.layer.cornerRadius = topBarView.frame.size.height/2
-            topBarView.clipsToBounds = true
-        }
-    }
-    
     @IBOutlet private weak var slideView: UIView! {
         didSet {
             //全体をタッチしたらタップアクションを実行させる
@@ -108,14 +100,6 @@ final class HalfModalViewController: UIViewController {
 }
 
 private extension HalfModalViewController {
-    @IBAction func tapChijime(_ sender: Any) {
-        chijime()
-    }
-    
-    @IBAction func tapNobiro(_ sender: Any) {
-        nobiro()
-    }
-    
     @objc func tapSlideView() {
         self.dismissModal(isAnimation: true)
     }
@@ -131,23 +115,4 @@ private extension HalfModalViewController{
         halfMainViewHeightConstraint.constant = 300
         self.view.layoutIfNeeded()
     }
-    
-    func nobiro() {
-        //制約のconstantを画面の高さ*0.8にする
-        halfMainViewHeightConstraint.constant = self.view.frame.height
-        //制約をアニメーションさせながら更新
-        UIView.animate(withDuration: 0.2) {
-            self.view.layoutIfNeeded()
-        }
-    }
-    
-    func chijime() {
-        //制約のconstantを300にする
-        halfMainViewHeightConstraint.constant = 300
-        //制約をアニメーションさせながら更新
-        UIView.animate(withDuration: 0.2) {
-            self.view.layoutIfNeeded()
-        }
-    }
-
 }
